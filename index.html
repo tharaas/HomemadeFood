@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-    <meta name=viewport content='width=700'><title>Homemade Food</title>
+  <meta name=viewport content='width=700'><title>Homemade Food</title>
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="./css/animate.css">
+  <link rel="stylesheet" href="./css/styles.css">
  <!-- link for icons-->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -17,14 +17,15 @@
 <body onload="render()">
 
   <header>
-    <nav class="deep-purple lighten-3">
+    <nav class="lighten-3" style="background-color: rgb(13, 235, 168);">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">
+        <a href="#" class="brand-logo center"> 
           <i style="font-size: 3rem!important;" class="material-icons">store</i>
         Homemade food Online Store</a>
 
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="cart.html">Shopping Cart <span id="cart_n"></span></a></li>
+          <li><a href="reserve.html">Reservation <span id="cart_n"></span></a></li>
         </ul>
       </div>
     </nav>
@@ -33,30 +34,53 @@
 
  <main role="main">
  <br>
+
+ 
+ <div class="card" style="color: rgb(7, 102, 73);">
+  <div class="card-tabs" style="border: solid 2px rgb(19, 231, 168);">
+    <ul class="tabs tabs-fixed-width">
+      <li class="tab"><a href="#homemade_foodDIV" style="color:rgb(7, 102, 73);font-size:20px;">Homemade food</a></li>
+      <li class="tab"><a href="#pastriesDIV" style="color:rgb(7, 102, 73);font-size:20px;">Pastries</a></li>
+      <li class="tab"><a href="#dessertDIV" style="color:rgb(7, 102, 73);font-size:20px;">Dessert</a></li>
+    </ul>
+  </div>
+  <div class="card-content grey lighten-4">
+    <h2 id="Homemade_food">Homemade food</h2>
+    <hr>
+    <div class="row" id="homemade_foodDIV"></div>
+    <h2 id="pastries">Pastries</h2>
+    <hr>
+    <div class="row" id="pastriesDIV"></div>
+    <h2 id="dessert">Dessert</h2>
+    <hr>
+    <div class="row" id="dessertDIV"></div>
+  </div>
+</div>
+
+<footer class="page-footer" style="background-color: rgb(13, 235, 168);">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12 center">
+        <p class="float-righ" style="color:black;font-size:20px;">Thank you for visiting our website 
+        <br>
+        <div class="row" style="color:black;font-size:20px;">Homemade food Online Store</div>
+        </p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="info.html">For Information</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
     <div class="container">
-      <h2 id="Homemade_food">Homemade food</h2>
-      <hr>
-      <div class="row" id="homemade_foodDIV"></div>
-      <h2 id="pastries">Pastries</h2>
-      <hr>
-      <div class="row" id="pastriesDIV"></div>
-      <h2 id="dessert">Dessert</h2>
-      <hr>
-      <div class="row" id="dessertDIV"></div>
-      <br><br><hr>
+    © 2022 Copyright
     </div>
-
-	  <footer class="white accent-4 center">
-	  <p class="float-right" style="color:black;font-size:20px;"> Thank you for visiting our website
-    <br>
-	  <div class="row" style="color:black;font-size:20px;">Homemade food Online Store
-    <br><br>
-      <a class="btn waves-effect white grey-text darken-text-2" href="info.html"> for information</a>
-      <br>
-    </div>
-	  </footer>
-
-  </main>
+  </div>
+</footer>
+</main>
 
   <!-- Modal -->
   <div id="modal1" class="modal">
