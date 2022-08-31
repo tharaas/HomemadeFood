@@ -1,12 +1,13 @@
 //web app's Firebase configuration
 var firebaseConfig = { 
-apiKey: "AIzaSyBKgot7qsfSlmr5dnAtrdlOlDzqFD5dk4s",
-authDomain: "homemade-food-9c1aa.firebaseapp.com", 
-databaseURL: "https://homemade-food-9c1aa.firebaseio.com",
-projectId: "homemade-food-9c1aa",
-storageBucket: "homemade-food-9c1aa.appspot.com",
-messagingSenderId: "745393512684",
-appId: "1:745393512684:web:6f2226b126e044e9e585c9"
+	apiKey: "AIzaSyA5x7DAxNIARKUa9LyYzQW6qFVl-TGDF6M",
+	authDomain: "homemade-food-2022.firebaseapp.com",
+	databaseURL: "https://homemade-food-2022.firebaseio.com",
+	projectId: "homemade-food-2022",
+	storageBucket: "homemade-food-2022.appspot.com",
+	messagingSenderId: "1039380704685",
+	appId: "1:1039380704685:web:5b3c8d7a7316cb56224524",
+	measurementId: "G-87W7BZ1G2L"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
