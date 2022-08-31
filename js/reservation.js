@@ -1,4 +1,4 @@
-Vue.component('Reservation',
+Vue.component('reservation',
 { 
     props:["id"],
     template: `<div :class="'animated fadeInRight component Reservation ' + id"> 
