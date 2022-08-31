@@ -4,11 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name=viewport content='width=700'><title>Homemade Food</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/S.css">
  <!-- link for icons-->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -16,6 +19,25 @@
 
 <body onload="render()">
 
+  <body>
+    <!-- Navigation bar -->
+    <header class="header center">
+        <!-- Logo -->
+        <a href="#" class="brand-logo" style="color: aliceblue; font-size: 3rem!important;"> 
+          <i style="font-size: 2rem!important; color: aliceblue;" class="material-icons ">store</i>
+        Homemade food Online Store</a>
+        <!-- Hamburger icon -->
+        <input class="side-menu" type="checkbox" id="side-menu"/>
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+        <!-- Menu -->
+        <nav class="nav">
+            <ul class="menu">
+              <li><a href="cart.html">Shopping Cart <span id="cart_n"></span></a></li>
+              <li><a href="reservation.html">Reservation <span id="cart_n"></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--
   <header>
     <nav class="lighten-3" style="background-color: rgb(13, 235, 168);">
       <div class="nav-wrapper">
@@ -25,15 +47,15 @@
 
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="cart.html">Shopping Cart <span id="cart_n"></span></a></li>
-          <li><a href="reserve.html">Reservation <span id="cart_n"></span></a></li>
+          <li><a href="reservation.html">Reservation <span id="cart_n"></span></a></li>
         </ul>
       </div>
     </nav>
   </header>
-
+-->
 
  <main role="main">
- <br>
+ <br><br>
 
  
  <div class="card" style="color: rgb(7, 102, 73);">
@@ -70,6 +92,7 @@
         <h5 class="white-text">Links</h5>
         <ul>
           <li><a class="grey-text text-lighten-3" href="info.html">For Information</a></li>
+          <li><a class="modal-trigger" href="#modal1">Login</a></li>
         </ul>
       </div>
     </div>
@@ -82,33 +105,32 @@
 </footer>
 </main>
 
-  <!-- Modal -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <div class="row">
-        <form id="formLogin" autocomplete="off" class="col s12">
-          <div class="input-field col s12">
-            <i class="material-icons prefix">account_circle</i>
-            <input type="text" required id="userName" class="validate">
-            <label form="icon_prefix">User</label>
-          </div>
-         
-          <div class="input-field col s12">
-            <i class="material-icons prefix">fingerprint</i>
-            <input type="password" required id="userPassword" class="validate">
-            <label form="icon_prefix">Password</label>
-          </div>
-
-          <button class="btn waves-effect waves-light" type="submit" name="action"> Submit 
-		      <i class="material-icons right">send</i> </button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- Modal End -->
+		<!-- Modal -->
+		<div id="modal1" class="modal">
+		  <form id="formLogin" d="formLogin" autocomplete="off" class="modal-content animate">
+			<div class="imgcontainer center">
+			  <img src="img/female.jpg"  alt="Avatar" class="avatar" style="width:100px">
+			</div>
+		
+			<div class="container">	
+			  <i class="material-icons prefix">account_circle</i>
+			  <input type="text" placeholder="Enter Username" id="userName" required class="validate">
+		
+			  <i class="material-icons prefix">fingerprint</i>
+			  <input type="password" placeholder="Enter Password" id="userPassword" required class="validate">
+			
+			  <button class="btn waves-effect waves-light" style="background-color: rgb(13, 235, 168);" type="submit" name="action"> Login 
+				<i class="material-icons right">send</i> </button>
+			</div>
+	
+		  </form>
+		</div>
+		<!-- Modal End -->
 
   <!--firebase-online store: -->
   <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <!-- Compiled and minified JavaScript -->
@@ -117,6 +139,6 @@
   <script src="./js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.4/dist/sweetalert2.all.min.js"></script>
   <script src="./js/login.js"></script>
- 
+  <link rel="stylesheet" href="css/styles.css">
 </body>
 </html>
