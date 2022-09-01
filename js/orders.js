@@ -15,7 +15,7 @@ const firestore= firebase.firestore();
  
 var finaldata;
 var orders = [];
-firebase.firestore().collection("orders").onSnapshot(function(querySnapshot) {
+firebase.firestore().collection("Food-Orders").onSnapshot(function(querySnapshot) {
 		querySnapshot.forEach(function(doc) {
 			//console.log(doc.data());
 			orders.push(doc.data())
@@ -28,6 +28,10 @@ function format(d) {
 	<tr>
 	  <td> Client:</td>
 	  <td> ${d.userName}</td>
+	</tr>
+	<tr>
+		<td>E-mail:</d>
+		<td> ${d.userEmail}</td>
 	</tr>
     <tr>
       <td>Year:</td>
@@ -111,5 +115,5 @@ $(document).ready(function () {
 				tdi.first().addClass(' fa-minus-square');
 			}
 		});
-	}, 1000)
+	}, 4000)
 });
