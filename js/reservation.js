@@ -1,142 +1,57 @@
-Vue.component('reservation',
-{ 
-    props:["id"],
-    template: `<div :class="'animated fadeInRight component Reservation ' + id"> 
-                <h1 v-if="after" class="animated bounceIn">We Have Received Your Request Successfully!</h1>        
-                <span class="notifications first-noti animated shake">Please, Select A Date Before Selecting Time</span>
-                <span class="notifications second-noti animated shake">Please, Select A Date Before Submitting Request</span>
-                <span class="notifications third-noti animated shake">Please, Select Time Before Submitting Request</span>
-                <span class="notifications last-noti animated shake">Please, Write Your Name Before Submitting Request</span>
+//web app's Firebase configuration
+var firebaseConfig = { 
+	apiKey: "AIzaSyA5x7DAxNIARKUa9LyYzQW6qFVl-TGDF6M",
+	authDomain: "homemade-food-2022.firebaseapp.com",
+  databaseURL: "https://homemade-food-2022.firebaseio.com",
+	projectId: "homemade-food-2022",
+	storageBucket: "homemade-food-2022.appspot.com",
+	messagingSenderId: "1039380704685",
+	appId: "1:1039380704685:web:5b3c8d7a7316cb56224524",
+	measurementId: "G-87W7BZ1G2L"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const firestore= firebase.firestore();
 
-                <div v-if="!afterSubmit" class="app"> 
-                    <from v-on:submit.prevent>
-                        <div class="input field col s6">
-                            <input id="last_name" type="text" class="validate" v-model="customerName">
-                            <label for="last_name" class="customerinfo">Name</label>
-                        </div>
-                        <div class="input field col s6">
-                            <input id="phone" type="number" class="validate" v-model="customerNumber">
-                            <label for="phone" class="customerinfo">Contant Number</label>
-                        </div>
-                        <div class="input field col s6">
-                            <input id="people" type="number" class="validate" v-model="customerNumberOfPeople">
-                            <label for="people" class="customerinfo">How many people on the table</label>
-                        </div>
-                        <input type="text" class="datepicker" placeholder="Pick A Date">
-                        <div class="select-time" @click="checkDate">See Available Time</div>
-                        <select class="browser-default time" v-show="dateSelected == 'selected'">
-                            <option value="">Select Time</option>
-                            <option value="time">09:00</option>
-                            <option value="time">09:30</option>
-                            <option value="time">10:00</option>
-                            <option value="time">10:30</option>
-                            <option value="time">11:30</option>
-                            <option value="time">11:00</option>
-                            <option value="time">12:00</option>
-                            <option value="time">13:00</option>
-                            <option value="time">14:00</option>
-                            <option value="time">15:00</option>
-                            <option value="time">15:30</option>
-                            <option value="time">16:00</option>
-                        </select>
-                        <hr>
-                            <a @click="post" class="waves-effect waves-light btn-large yellow"><i class="material-icons left Medium">event</i>Make Reservation</a>
-                    </from>
-                </div>
-            </div>`,
-    data(){
-        return {
-            afterSubmit: false,
-            customerName: "",
-            customerNumber: "",
-            customerNumberOfPeople: "",
-            dateSelected: 'Notselected',
-            date: '',
-            bookedTime: [],
-            validationName : false,
-            validationDate : false,
-            validationTime : false
-        }
-    },
-    methods:{
-        checkDate(){
-            this.date = document.getElementsByClassName('datepicker')[0].value;
-            if(this.date){
-                this.dateSelected = 'selected';
-                this.$http.get('https://appointment-booking-web2022-default-rtdb.asia-southeast1.firebasedatabase.app/appointments.json').then(function(){
-                    let savedData = Object.values(data.body); 
-                    for(let x=0; x< savedData.length ;x++){
-                        if(savedData[x].date == this.date){
-                            this.bookedTime.push(parseInt(savedData[x].time));
-                        }
-                    }
-                    console.log(this.bookedTime);
-                });
-            }
-            else{
-                this.notificatin('first-noti');
-            }
-        },
-        post(){
-            let time = document.getElementsByClassName('time')[0].value;
-            this.checkDate();
-            if(!this.date){
-                this.notificatin('second-noti');
-            }else{
-                this.validationDate = true;
-            }
-            if(!time){
-                this.notificatin('third-noti');
-            }else{
-                this.validationTime = true;
-            }
-            if(!this.customerName){
-                this.notificatin('last-noti');
-            }else{
-                this.validationName = true;
-            }
-            if(this.validationDate == true & this.validationTime == true & this.validationName == true){
-                this.$http.post('https://appointment-booking-web2022-default-rtdb.asia-southeast1.firebasedatabase.app/appointments.json',
-                {
-                    "customerName" : this.customerName,
-                    "customerNumber" : this.customerNumber,
-                    "customerNumberOfPeople" : this.customerNumberOfPeople,
-                    "date" : this.date,
-                    "time" : time,
-                    "status" : "pending"
-                }).then(function(data){
-                    this.afterSubmit = true;
-                });
-            }
-        },
-        notificatin(element){
-            document.getElementsByClassName(element)[0].style.display = "block";
-            setTimeout(function(){
-                document.getElementsByClassName(element)[0].style.display = "none";
-            },5000)
-        }
-    }
-});
+function clean() {
+  document.getElementById('last_name').innerHTML = '';
+  document.getElementById('phone').innerHTML = '';
+  document.getElementById('people').innerHTML = '';
+  document.getElementById('dateR').innerHTML = '';
+  document.getElementById('timeR').innerHTML = '';
+  localStorage.clear();
+}
 
-Vue.directive('check',
-{
-    update(el,binding,vnode){
-        let time = parseInt(el.innerHTML);
-        let check = vnode.context.bookedTime.includes(time);
-        if(check){
-            el.disables = true;
-            el.style.color = "yellow";
-            el.innerHTML = el.innerHTML + "Not Available";
-        }
-        else{
-            el.disables = false;
-            el.style.color = "blue";
-            el.style.fontSize = "1.2rem";
-        }
-    }
-});
+$(document).ready(() => {
+  $("#app").modal();
+  var userName = document.getElementById('last_name');
+  var phone = document.getElementById('phone');
+  var custumerNumber = document.getElementById('people');
+  var dateR = document.getElementById('dateR');
+  var timeR = document.getElementById('timeR');
+  var id = document.getElementById('last_name');
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.datepicker');
-    var instances = M.Datepicker.init(elems, {minDate : new Date()});
+  $("#formRes").submit(function (e) {
+    e.preventDefault();
+    firebase.firestore().collection("appointments").add({
+      id: userName.value,
+      userName: userName.value,
+      phone: phone.value,
+      custumerNumber: custumerNumber.value,
+      dateR: dateR.value,
+      timeR: timeR.value
+    })
+      .then(() => {
+        swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: ' successfully!',
+          text: `Your resevation number is: ${id}`,
+          showConfirmButton: true,
+          timer: 50000
+        });
+        $("#app").modal('close');
+        clean();
+      })
+  });
 });

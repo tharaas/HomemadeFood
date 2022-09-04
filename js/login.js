@@ -16,7 +16,7 @@ const firestore= firebase.firestore();
 var x = document.getElementById("userName");
 var p = document.getElementById("userPassword");
 
-	document.getElementById("formLogin").addEventListener("submit",(ee)=>{
+document.getElementById("formLogin").addEventListener("submit",(ee)=>{
 		ee.preventDefault();
 		console.log(x.value);
 		console.log(p.value);

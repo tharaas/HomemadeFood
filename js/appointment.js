@@ -1,100 +1,99 @@
-Vue.component('admin',
-{
-    template: `<div>
-                <table class="pending">
-                    <thead>
-                        <tr>
-                            <th>Update</th>
-                            <th>Status</th>
-                            <th>Dates</th>
-                            <th>Timing</th>
-                            <th>Names</th>
-                            <th>Contact Numbers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="booking in bookings" v-show="booking.status == 'pending'">
-                            <td>
-                                <a href="javascript:;">
-                                    <i @click="update" :data-key=booking.unique :id=booking.status class="material-icons">autorenew</i>
-                                </a>
-                            </td>  
-                            <td>{{ booking.status }}</td>
-                            <td>{{ booking.date }}</td>
-                            <td>{{ booking.time }}</td>
-                            <td>{{ booking.customerName }}</td>
-                            <td>{{ booking.customerNumber }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br><hr class="hr"><br>
-                <table class="approved">
-                    <thead>
-                        <tr>
-                            <th>Update</th>
-                            <th>Status</th>
-                            <th>Dates</th>
-                            <th>Timing</th>
-                            <th>Names</th>
-                            <th>Contact Numbers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="booking in bookings" v-show="booking.status == 'approved'">
-                            <td>
-                                <a href="javascript:;">
-                                    <i @click="update" :data-key=booking.unique :id=booking.status class="material-icons">autorenew</i>
-                                </a>
-                            </td>  
-                            <td>{{ booking.status }}</td>
-                            <td>{{ booking.date }}</td>
-                            <td>{{ booking.time }}</td>
-                            <td>{{ booking.customerName }}</td>
-                            <td>{{ booking.customerNumber }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>`,
-    data(){
-        return{
-            bookings : [],
-            statusUpdate : ""
-        }
-    },
-    methods :{ 
-        update(event){
-            let key = event.srcElement.dataset.key;
-            let status = event.srcElement.id;
-            if(status == 'pending'){
-                this.statusUpdate = 'approved';
-            }else{
-                this.statusUpdate = 'pending';
-            }
-            let reload = () => {this.fetcher();}
-            firebase.database().ref('appointments').child(key).update(
-                {
-                    status: this.statusUpdate
-                },function(error){
-                    if(!error){
-                        reload();
-                    }
-                }
-            );
-        },
-        fetcher(){ //firebase
-            this.$http.get('https://appointment-booking-web2022-default-rtdb.asia-southeast1.firebasedatabase.app/appointments.json').then(function(){
-                return data.json();
-            }).then(function(data){
-                let req = [];
-                for(let key in data){
-                    data[key].unique = key;
-                    req.push(data[key]);
-                }
-                this.booking = req;
-            });
-        }
-    },
-    created(){
-        this.fetcher();
-    }
+//web app's Firebase configuration
+var firebaseConfig = { 
+	apiKey: "AIzaSyA5x7DAxNIARKUa9LyYzQW6qFVl-TGDF6M",
+	authDomain: "homemade-food-2022.firebaseapp.com",
+    databaseURL: "https://homemade-food-2022.firebaseio.com",
+	projectId: "homemade-food-2022",
+	storageBucket: "homemade-food-2022.appspot.com",
+	messagingSenderId: "1039380704685",
+	appId: "1:1039380704685:web:5b3c8d7a7316cb56224524",
+	measurementId: "G-87W7BZ1G2L"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const firestore= firebase.firestore();
+
+var finaldata;
+var resevation = [];
+firebase.firestore().collection("appointments").onSnapshot(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			resevation.push(doc.data())
+		});
+		finaldata = resevation;
+	});
+
+function format(d) {
+	return `<table>
+	<tr>
+	  <td> Client:</td>
+	  <td> ${d.userName}</td>
+	</tr>
+	<tr>
+		<td> Phone:</d>
+		<td> ${d.phone}</td>
+	</tr>
+    <tr>
+      <td>Date:</td>
+      <td>${d.dateR}</td>
+    </tr>
+    <tr>
+      <td> Time:</td>
+      <td>${d.timeR}</td>
+    </tr>
+    <tr>
+      <td> custumer Number:</td>
+      <td>${d.custumerNumber}</td>
+    </tr>
+    <tr>
+    <td>Id:</td>
+    <td>${d.id}</td>
+	</tr>
+    <tr>
+ </table>`;
+}
+
+$(document).ready(function () {
+	setTimeout(function () {
+		var table = $('#adminRes').DataTable({
+			"data": finaldata,
+			select: "single",
+			"columns": [
+				{
+					"className": 'details-control',
+					"ordersable": false,
+					"data": null,
+					"defaultContent": '',
+					"render": function () { return '<i style="hover:pointer" class=" fa fa-plus-sqaure"aria-hidden="true"></i>'; },
+					width: "15px"
+				},
+				{ "data": "id" },
+				{ "data": "dateR" },
+				{ "data": "userName" },
+                { "data": "phone" },
+                { "data": "timeR" },
+                { "data": "custumerNumber" }
+			]
+		});
+		//add event listener for opening and closing 
+		$('#formRes tbody').on('click', 'td.details-control', function () {
+			var tr = $(this).closest('tr');
+			var tdi = tr.find("i.fa")
+			var row = table.row(tr);
+
+			if (row.child.isShown()) {
+				//close row
+				row.child.hide();
+				tr.removeClass('shown');
+				tdi.first().removeClass('fa-minus-square');
+				tdi.first().addClass('fa-plus-sqaure');
+			}
+			else {
+				//open row
+				row.child(format(row.data())).show();
+				tr.addClass('shown');
+				tdi.first().removeClass(' fa-plus-sqaure');
+				tdi.first().addClass(' fa-minus-square');
+			}
+		});
+	}, 4000)
 });

@@ -77,7 +77,7 @@ function HTMLPhoneProduct(con){
                     class="btn-floating halfway-fab waves-effect lighten-2" style="background-color: rgb(13, 235, 168);">
 					<i class="material-icons">add_shopping_cart</i></a>
                     <a id="${btn}alert" style="display:none" onclick="alertCart()" 
-                    class="btn-floating halfway-fab waves-effect waves-light green">
+                    class="btn-floating halfway-fab waves-effect waves-light yellow">
 					<i class="material-icons">shopping_cart</i></a>
                 </div>    
                 <div class="card-content">
@@ -103,7 +103,7 @@ function HTMLpastriesProduct(con){
             <div class="card">
                 <div class="card-image">
                     <img src="${pastries[con-1].img}">
-                    <a id"{btn}alert" onclick="alertCart()" calss="btn-floating halfway-fab waves-effect waves-light green">
+                    <a id"{btn}alert" onclick="alertCart()" calss="btn-floating halfway-fab waves-effect waves-light yellow">
                     <i class="material-icons">shopping_cart</i> 
                     </a>
                  </div>
@@ -133,7 +133,7 @@ function HTMLpastriesProduct(con){
                     class="btn-floating halfway-fab waves-effect lighten-2" style="background-color: rgb(13, 235, 168);">
 					<i class="material-icons">add_shopping_cart</i></a>
                     <a id="${btn}alert" style="display:none" onclick="alertCart()" 
-                    class="btn-floating halfway-fab waves-effect waves-light green">
+                    class="btn-floating halfway-fab waves-effect waves-light yellow">
 					<i class="material-icons">shopping_cart</i></a>
                 </div>    
                 <div class="card-content">
@@ -159,7 +159,7 @@ function HTMLdessertProduct(con){
             <div class="card">
                 <div class="card-image">
                     <img src="${pastries[con-1].img}">
-                    <a id="${btn}alert" onclick="alertCart()" calss="btn-floating halfway-fab waves-effect waves-light green">
+                    <a id="${btn}alert" onclick="alertCart()" calss="btn-floating halfway-fab waves-effect waves-light yellow">
                     <i class="material-icons">shopping_cart</i> 
                     </a>
                  </div>
@@ -189,7 +189,7 @@ function HTMLdessertProduct(con){
                     class="btn-floating halfway-fab waves-effect lighten-2" style="background-color: rgb(13, 235, 168);">
 					<i class="material-icons">add_shopping_cart</i></a>
                     <a id="${btn}alert" style="display:none" onclick="alertCart()" 
-                    class="btn-floating halfway-fab waves-effect waves-light green">
+                    class="btn-floating halfway-fab waves-effect waves-light yellow">
 					<i class="material-icons">shopping_cart</i></a>
                 </div>    
                 <div class="card-content">

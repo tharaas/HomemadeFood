@@ -213,7 +213,7 @@ $(document).ready(() => {
       userOrder: order,
       userName: userName.value,
       userEmail: userEmail.value,
-      payment: 1,
+      payment: "card",
       userDate: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
       hour: d.getHours() + "." + d.getMinutes() + ":" + d.getSeconds(),
       userYear: d.getFullYear(),
